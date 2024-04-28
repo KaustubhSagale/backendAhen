@@ -61,24 +61,35 @@ app.post('/payment', async (req, res) => {
     res.status(500).json({ message: 'Internal Server Error' });
   }
 });
-app.get('getPayment',async(req,res)=>{
+app.get('/getPayment',async(req,res)=>{
   try {
     const payments = await Payment.find();
-    console.log("Hi")
     if(payments.length>0){
       res.status(200).json({ payments });
     }
     else{
       res.status(200).json({ message: 'No record Found' });
     }
-
-    res.status(201).json({ message: 'Message sent successfully!' });
   } catch (error) {
     console.error('Error:', error.message);
     res.status(500).json({ message: 'Internal Server Error' });
   }
 })
 
+app.get('/getContact',async(req,res)=>{
+  try {
+    const contact = await Contact.find();
+    if(contact.length>0){
+      res.status(200).json({ contact });
+    }
+    else{
+      res.status(200).json({ message: 'No record Found' });
+    }
+  } catch (error) {
+    console.error('Error:', error.message);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
+})
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
